@@ -137,6 +137,16 @@ function CharCreate( ply )
 			return
 		end
 		
+		if LocalPlayer().finalsurname == " " then
+			Derma_Message( "Enter a Sur Name", "Profile Error", "Close" )
+			return
+		end
+		
+		if LocalPlayer().finalfirstname == " " then
+			Derma_Message( "Enter a First Name", "Profile Error", "Close" )
+			return
+		end
+		
 		SubmitProfile( ply )
 		
 	end

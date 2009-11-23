@@ -1,8 +1,8 @@
-
-
 include( 'shared.lua' )
-include( 'cl_loadscreen.lua' )
+
 include( 'cl_charactercreate.lua' )
+include( 'cl_hud.lua' )
+include( 'cl_loadscreen.lua' )
 
 gmod_vehicle_viewmode = CreateClientConVar( "gmod_vehicle_viewmode", "1", true, true )
 
@@ -62,46 +62,6 @@ function GM:PlayerBindPress( pl, bind, down )
 
 	return false	
 	
-end
-
-/*---------------------------------------------------------
-   Name: gamemode:HUDShouldDraw( name )
-   Desc: return true if we should draw the named element
----------------------------------------------------------*/
-function GM:HUDShouldDraw( name )
-
-	// Allow the weapon to override this
-	local ply = LocalPlayer()
-	if (ply && ply:IsValid()) then
-	
-		local wep = ply:GetActiveWeapon()
-		
-		if (wep && wep:IsValid() && wep.HUDShouldDraw != nil) then
-		
-			return wep.HUDShouldDraw( wep, name )
-			
-		end
-		
-	end
-
-	return true;
-end
-
-/*---------------------------------------------------------
-   Name: gamemode:HUDPaint( )
-   Desc: Use this section to paint your HUD
----------------------------------------------------------*/
-function GM:HUDPaint()
-	GAMEMODE:HUDDrawTargetID()
-	GAMEMODE:HUDDrawPickupHistory()
-	GAMEMODE:DrawDeathNotice( 0.85, 0.04 )
-end
-
-/*---------------------------------------------------------
-   Name: gamemode:HUDPaintBackground( )
-   Desc: Same as HUDPaint except drawn before
----------------------------------------------------------*/
-function GM:HUDPaintBackground()
 end
 
 /*---------------------------------------------------------
