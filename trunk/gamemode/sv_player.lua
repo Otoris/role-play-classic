@@ -13,41 +13,17 @@ function GM:DoPlayerDeath( ply, attacker, dmginfo )
 	
 end
 
--- local function StorePlayerAmmo(ply)
+-- local function StorePlayerAmmo( ply )
 	-- local ret = {}
-	-- for _,v in ipairs(ply:GetWeapons()) do
-		-- ret[v:GetPrimaryAmmoType()] == v:Clip1()]
+	-- for _,v in ipairs( ply:GetWeapons() ) do
+		-- ret[v:GetPrimaryAmmoType()] = v:Clip1()
+	-- end
+	-- if DeveloperMode then
+		-- PrintTable( ret )
 	-- end
 	-- return ret
 -- end
-
-local function CreateTask( ply, task, name, obj, complete, ttime )
-	local task = {
-		name,
-		obj,
-		complete,
-		tonumber(ttime)
-	}
-	timer.Create( name, ttime, 1, function() if complete then timer.Destroy( name ) return end RemoveTask( name ) end )
-	if DeveloperMode then
-	PrintTable( task )
-	Msg( task )
-	end
-end
-
-function TestTask( ply, cmd, args )
-CreateTask( ply, args[1], args[2], args[3], false, args[5] )
-end
-concommand.Add( "testtask", TestTask )
-function TradeTask( ply, target, task )
-
-end
-
-local function RemoveTask( task )
-	table.Remove( task )
-end
-
-
+-- concommand.Add( "storeammo", StorePlayerAmmo )
 
 function meta:PlayerSetModel( model )
 
@@ -56,4 +32,10 @@ function meta:PlayerSetModel( model )
 	util.PrecacheModel( modelname )
 	self:SetModel( modelname )
 
+end
+
+function meta:GiveCurrency( amount )
+	camount = meta:GetNWString( "Currency" )
+	famount = tonumber(camount) + tonumber(amount)
+	meta:SetNWString( "Currency", tostring(famount) )
 end
