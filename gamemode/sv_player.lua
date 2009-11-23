@@ -35,7 +35,13 @@ function meta:PlayerSetModel( model )
 end
 
 function meta:GiveCurrency( amount )
-	camount = meta:GetNWString( "Currency" )
-	famount = tonumber(camount) + tonumber(amount)
+	local camount = meta:GetNWString( "Currency" )
+	local famount = tonumber(camount) + tonumber(amount)
+	meta:SetNWString( "Currency", tostring(famount) )
+end
+
+function meta:TakeCurrency( amount )
+	local camount = meta:GetNWString( "Currency" )
+	local famount = tonumber(camount) - tonumber(amount)
 	meta:SetNWString( "Currency", tostring(famount) )
 end
