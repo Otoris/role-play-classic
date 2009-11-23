@@ -1,0 +1,18 @@
+"Gamemode"
+{
+	"name"		"Role-Play Classic"
+	"version"	"Alpha 1"
+
+	"author_name"	"The Otoris Corp."
+	"author_email"	"me@otoris.com"
+	"author_url"	"http://www.otoris.com/"
+	
+	"icon"		""
+	"info"		"Classical Role-Play for the more cultured Garry's Mod Player."
+	"hide"		""
+	
+	"mappattern"
+	{
+		"1"	"^rp_"
+	}
+}
