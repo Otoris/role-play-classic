@@ -1,5 +1,5 @@
 function Startup()
-	
+	//Start up our database by either A) Loading the existing one or B) creating tables for a new one!
 	if ( sql.TableExists( "profiles" ) && sql.TableExists( "permakills" ) ) then
 		Msg( "Player Profiles Loaded\n" )
 		Msg( "Permakills list Loaded\n" )
@@ -30,18 +30,18 @@ end
 
 local function CheckForProfile( ply )
 
-	unique_id = ply:SteamID()
+	ply.unique_id = ply:SteamID()
 	
-	result = sql.Query( "SELECT unique_id FROM profiles WHERE unique_id = '"..unique_id.."'" )
+	result = sql.Query( "SELECT unique_id FROM profiles WHERE unique_id = '"..ply.unique_id.."'" )
 	if ( result ) then
 		if DeveloperMode then
-		Msg( "Profile ".. unique_id .." Exists\n" )
+		Msg( "Profile ".. ply.unique_id .." Exists\n" )
 		end
 		NewChar = "Failure"
 		LoadProfile( ply ) // We will call this to retrieve the stats
 	else
 		if DeveloperMode then
-		Msg( "Profile ".. unique_id .." Creating\n" )
+		Msg( "Profile ".. ply.unique_id .." Creating\n" )
 		end
 		NewChar = nil
 		ply:SendLua( "CharCreate()" )
@@ -65,11 +65,11 @@ function GetNewSetup( ply, cmd, args )
 		return
 		end
 	
-		rp_firstname = args[1]
-		rp_surname = args[2]
-		rp_model = args[3]
-		rp_armor = StartingArmor
-		rp_hp = StartingHP
+		ply.rp_firstname = args[1]
+		ply.rp_surname = args[2]
+		ply.rp_model = args[3]
+		ply.rp_armor = StartingArmor
+		ply.rp_hp = StartingHP
 		ply:SendLua( "CompleteCharCreation()" )
 		NewChar = "Failure"
 		CreateProfile( unique_id, ply ) // Create a new player :D
@@ -82,11 +82,11 @@ concommand.Add( "rp_newcharacter", GetNewSetup )
 
 function CreateProfile( unique_id, ply )
 
-	sql.Query( "INSERT INTO profiles ( `unique_id`, `rp_firstname`, `rp_surname`, `rp_model`, `rp_hp`, `rp_armor`, `rp_currency` )VALUES ( '".. unique_id .."', '".. rp_firstname .."', '".. rp_surname .."', '".. rp_model .."', '".. rp_hp .."', '".. rp_armor .."', '1' )" )
-	result = sql.Query( "SELECT unique_id FROM profiles WHERE unique_id = '".. unique_id .."'" )
+	sql.Query( "INSERT INTO profiles ( `unique_id`, `rp_firstname`, `rp_surname`, `rp_model`, `rp_hp`, `rp_armor`, `rp_currency` )VALUES ( '".. ply.unique_id .."', '".. ply.rp_firstname .."', '".. ply.rp_surname .."', '".. ply.rp_model .."', '".. ply.rp_hp .."', '".. ply.rp_armor .."', '1' )" )
+	result = sql.Query( "SELECT unique_id FROM profiles WHERE unique_id = '".. ply.unique_id .."'" )
 	if ( result ) then
 		if DeveloperMode then
-		Msg( "Profile ID ".. unique_id .." Created\n" )
+		Msg( "Profile ID ".. ply.unique_id .." Created\n" )
 		end
 		LoadProfile( ply )
 	else
@@ -102,20 +102,20 @@ function DestroyProfile( unique_id, ply )
 	
 	timer.Destroy( "SaveProfile" )
 	sql.Query( "INSERT INTO permakills ( `rp_firstname`, `rp_surname` )VALUES ( '".. ply:GetNWString( "FirstName" ) .. "', '".. ply:GetNWString( "SurName" ) .."' )" )
-	sql.Query( "DELETE FROM profiles WHERE unique_id = '".. unique_id .."'" )
+	sql.Query( "DELETE FROM profiles WHERE unique_id = '".. ply.unique_id .."'" )
 	if DeveloperMode then
-		Msg( "Profile ID ".. unique_id .." Destroyed and Added to the Permakill list\n" )
+		Msg( "Profile ID ".. ply.unique_id .." Destroyed and Added to the Permakill list\n" )
 	end
 end
 
 local function SaveProfile( ply )
 
-	currency = ply:GetNWString( "Currency" )
-	hp = ply:Health()
-	armor = ply:Armor()
-	sql.Query("UPDATE profiles SET rp_currency = "..currency..", rp_hp = "..hp..", rp_armor = "..armor.."  WHERE unique_id = '"..unique_id.."'")
+	ply.currency = ply:GetNWString( "Currency" )
+	ply.hp = ply:Health()
+	ply.armor = ply:Armor()
+	sql.Query("UPDATE profiles SET rp_currency = "..ply.currency..", rp_hp = "..ply.hp..", rp_armor = "..ply.armor.."  WHERE unique_id = '"..ply.unique_id.."'")
 	if DeveloperMode then
-	Msg( "Profile ID ".. unique_id .." Saved\n" )
+		Msg( "Profile ID ".. ply.unique_id .." Saved\n" )
 	end
 
 end
@@ -123,14 +123,14 @@ concommand.Add( "rp_saveprofile", SaveProfile )
 
 function LoadProfile( ply )
 
-	profile = sql.QueryRow("SELECT * FROM profiles WHERE unique_id = '"..unique_id.."'")
+	ply.profile = sql.QueryRow("SELECT * FROM profiles WHERE unique_id = '"..unique_id.."'")
 	
-	firstname = profile["rp_firstname"]
-	surname = profile["rp_surname"]
-	model = profile["rp_model"]
-	hp = profile["rp_hp"]
-	armor = profile["rp_armor"]
-	currency = profile["rp_currency"]
+	ply.firstname = ply.profile["rp_firstname"]
+	ply.surname = ply.profile["rp_surname"]
+	ply.model = ply.profile["rp_model"]
+	ply.hp = ply.profile["rp_hp"]
+	ply.armor = ply.profile["rp_armor"]
+	ply.currency = ply.profile["rp_currency"]
 	
 	ply:SetNWString( "FirstName", firstname )
 	ply:SetNWString( "SurName", surname )
@@ -139,8 +139,8 @@ function LoadProfile( ply )
 	ply:Spawn()
 	
 	if DeveloperMode then
-	Msg( "Profile ID ".. unique_id .." Loaded\n" )
-	Msg( firstname .." ".. surname .." ".. model .." HP:".. hp .." ARMOR:".. armor .." Currency:".. currency .."\n" )
+		Msg( "Profile ID ".. unique_id .." Loaded\n" )
+		Msg( "Please welcome! ".. ply.firstname .." ".. ply.surname .." ".. ply.model .." HP:".. ply.hp .." ARMOR:".. ply.armor .." Currency:".. ply.currency .."\n" )
 	end
 	
 end
@@ -157,7 +157,7 @@ function PlayerInitialSpawn( ply )
 	ply:Lock()
 	
 	timer.Simple( 5, function()
-		unique_id = ply:SteamID()
+		ply.unique_id = ply:SteamID()
 		CheckForProfile( ply ) 
 		ply:SendLua( "FinishLoad()" )
 		ply:UnLock()
@@ -168,7 +168,7 @@ end
 function PlayerSpawn( ply )
 	ply:SetHealth( hp )
 	ply:SetArmor( armor )
-	timer.Create( "SaveProfile", 10, 0, function() ply:ConCommand( "rp_saveprofile" ) end )
+	timer.Create( "SaveProfile", 10, 0, function() if ValidEntity( ply ) then ply:ConCommand( "rp_saveprofile" ) end end )
 end
 
 hook.Add( "Initialize", Initialize, Initialize )
