@@ -123,7 +123,7 @@ concommand.Add( "rp_saveprofile", SaveProfile )
 
 function LoadProfile( ply )
 
-	ply.profile = sql.QueryRow("SELECT * FROM profiles WHERE unique_id = '"..unique_id.."'")
+	ply.profile = sql.QueryRow("SELECT * FROM profiles WHERE unique_id = '"..ply.unique_id.."'")
 	
 	ply.firstname = ply.profile["rp_firstname"]
 	ply.surname = ply.profile["rp_surname"]
@@ -132,14 +132,14 @@ function LoadProfile( ply )
 	ply.armor = ply.profile["rp_armor"]
 	ply.currency = ply.profile["rp_currency"]
 	
-	ply:SetNWString( "FirstName", firstname )
-	ply:SetNWString( "SurName", surname )
-	ply:SetNWString( "Currency", currency )
-	ply:ConCommand( "ChangeModel ".. model )
+	ply:SetNWString( "FirstName", ply.firstname )
+	ply:SetNWString( "SurName", ply.surname )
+	ply:SetNWString( "Currency", ply.currency )
+	ply:ConCommand( "ChangeModel ".. ply.model )
 	ply:Spawn()
 	
 	if DeveloperMode then
-		Msg( "Profile ID ".. unique_id .." Loaded\n" )
+		Msg( "Profile ID ".. ply.unique_id .." Loaded\n" )
 		Msg( "Please welcome! ".. ply.firstname .." ".. ply.surname .." ".. ply.model .." HP:".. ply.hp .." ARMOR:".. ply.armor .." Currency:".. ply.currency .."\n" )
 	end
 	
@@ -166,8 +166,9 @@ function PlayerInitialSpawn( ply )
 end
 
 function PlayerSpawn( ply )
-	ply:SetHealth( hp )
-	ply:SetArmor( armor )
+	ply:SetHealth( ply.hp )
+	ply:SetArmor( ply.armor )
+	ply:SendLua( "SaveTimer()" )
 end
 
 hook.Add( "Initialize", Initialize, Initialize )

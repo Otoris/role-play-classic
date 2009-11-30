@@ -2,7 +2,7 @@
 
 DeveloperMode = true --Default: false
 RagdollRemoveTime = 2880 --Default: 2880
-ChatDistance = 300 --Default: 320
+ChatDistance = 300 --Default: 300
 StartingArmor = 0 --Default: 0
 StartingHP = 100 --Default: 100
 
