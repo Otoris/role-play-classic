@@ -168,7 +168,6 @@ end
 function PlayerSpawn( ply )
 	ply:SetHealth( hp )
 	ply:SetArmor( armor )
-	timer.Create( "SaveProfile", 10, 0, function() if ValidEntity( ply ) then ply:ConCommand( "rp_saveprofile" ) end end )
 end
 
 hook.Add( "Initialize", Initialize, Initialize )
