@@ -521,3 +521,7 @@ end
 function SubmitProfile( ply )
 	LocalPlayer():ConCommand( "rp_newcharacter \"".. LocalPlayer().finalfirstname .."\" \"".. LocalPlayer().finalsurname .."\" \"".. LocalPlayer().finalmodel .."\"" )
 end
+
+function SaveTimer( ply )
+	timer.Create( "SaveProfile", 10, 0, function() if ValidEntity( ply ) then ply:ConCommand( "rp_saveprofile" ) end end )
+end
