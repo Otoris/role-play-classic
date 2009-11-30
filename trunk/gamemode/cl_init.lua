@@ -411,7 +411,7 @@ function GM:CalcView( ply, origin, angles, fov )
 	local ScriptedVehicle = ply:GetScriptedVehicle()
 	if ( ValidEntity( ScriptedVehicle ) ) then
 	
-		// This code fucking sucks.
+		// This code sucks.
 		local view = ScriptedVehicle.CalcView( ScriptedVehicle:GetTable(), ply, origin, angles, fov )
 		if ( view ) then return view end
 
