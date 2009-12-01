@@ -1,7 +1,7 @@
 function GM:PlayerSay( ply, text, toall )
 
-	for k, v in pairs(player.GetAll()) do
-		if ply:GetPos():Distance(v:GetPos()) < ChatDistance then
+	for _, pl in pairs(player.GetAll()) do
+		if pl:EyePos( ):Distance( ply:EyePos( ) ) <= ChatDistance then
 			if DeveloperMode then
 			Msg( "Returned Text\n" )
 			end
