@@ -6,7 +6,6 @@ RPClassic is totally modifiable for any style Gamemode/RP :/
 RPClassic is completely from scratch and is not taken from any other gamemodes. (Except GMod Base)
 
 ---------------------------------------------------------*/
-
 include( 'shd_chat.lua' )
 include( 'shd_config.lua' )
 include( 'shd_player.lua' )
