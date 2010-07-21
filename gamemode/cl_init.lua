@@ -1,5 +1,7 @@
 include( 'shared.lua' )
-
+include( 'shd_animation.lua' )
+include( 'shd_config.lua' )
+include( 'shd_chat.lua' )
 include( 'cl_charactercreate.lua' )
 include( 'cl_hud.lua' )
 include( 'cl_loadscreen.lua' )
