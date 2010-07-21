@@ -1,6 +1,7 @@
 AddCSLuaFile( 'cl_init.lua' )
 AddCSLuaFile( 'cl_charactercreate.lua' )
 AddCSLuaFile( 'cl_loadscreen.lua' )
+AddCSLuaFile( 'cl_hud.lua' )
 AddCSLuaFile( 'shared.lua' )
 AddCSLuaFile( 'shd_player.lua' )
 AddCSLuaFile( 'shd_chat.lua' )
