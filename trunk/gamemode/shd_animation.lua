@@ -4,6 +4,7 @@ All Credit for Animations goes to Kuropixel/Conna/Kuromiku
 
 rpc.animation = {};
 rpc.animation.models = {};
+rpc.animation.models.male = {}
 rpc.animation.stored = {};
 rpc.animation.convert = {
 	[ACT_HL2MP_IDLE_CROSSBOW] = "smg",
@@ -407,6 +408,9 @@ rpc.animation.stored.maleHuman = {
 function rpc.animation.AddModel(class, model)
 	rpc.animation.models[ string.lower(model) ] = class;
 end;
+function rpc.animation.AddMaleModel(model)
+	rpc.animation.models.male[ string.lower(model) ];
+end;
 
 -- A function to get a model's class.
 function rpc.animation.GetModelClass(model, alwaysReal)
@@ -438,7 +442,7 @@ end;
 
 -- A function to add a male human model.
 function rpc.animation.AddMaleHumanModel(model)
-	rpc.animation.AddModel("maleHuman", model);
+	rpc.animation.AddMaleModel(model);
 end;
 
 -- A function to get a weapon's hold type.
