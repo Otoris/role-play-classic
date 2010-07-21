@@ -2,7 +2,7 @@
 /*---------------------------------------------------------
 
 RPClassic is in no way meant to be ready for server use unless you want the baseline Role-Play Experience.
-RPClassic is totally modifiable for any style Gamemode/RP :/ (RP in gmod sucks btw - Always will...)
+RPClassic is totally modifiable for any style Gamemode/RP :/
 RPClassic is completely from scratch and is not taken from any other gamemodes. (Except GMod Base)
 
 ---------------------------------------------------------*/
@@ -10,6 +10,7 @@ RPClassic is completely from scratch and is not taken from any other gamemodes. 
 include( 'shd_chat.lua' )
 include( 'shd_config.lua' )
 include( 'shd_player.lua' )
+include( 'shd_animation.lua' )
 
 GM.Name 		= "Role-Play Classic"
 GM.Author 		= "The Otoris Corp."
