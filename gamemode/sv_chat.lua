@@ -1,4 +1,3 @@
-include( 'shd_chat.lua' )
 function GM:PlayerSay( ply, text, toall )
 
 	for _, pl in pairs(player.GetAll()) do
