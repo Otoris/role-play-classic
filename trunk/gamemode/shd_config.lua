@@ -6,6 +6,8 @@ ChatDistance = 300 --Default: 300
 StartingArmor = 0 --Default: 0
 StartingHP = 100 --Default: 100
 
+rpc = {}
+rpc.animation = {}
 rpc.animation.models = {} --List of models for model select. Note: Valve NPC animations suck to bind to player animations, therefore I chose to use player animations,,,
 
 mdlList[1] = "models/player/group01/male_08.mdl"
