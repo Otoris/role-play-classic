@@ -409,7 +409,7 @@ function rpc.animation.AddModel(class, model)
 	rpc.animation.models[ string.lower(model) ] = class;
 end;
 function rpc.animation.AddMaleModel(model)
-	rpc.animation.models.male[ string.lower(model) ];
+	rpc.animation.models.male[ string.lower(model) ] = model;
 end;
 
 -- A function to get a model's class.
