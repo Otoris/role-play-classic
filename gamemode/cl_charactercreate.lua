@@ -1,3 +1,4 @@
+include( 'shd_animation.lua' )
 function CharCreate( ply )
 
 	CharPanel = vgui.Create( "DFrame" ) -- Creates the frame itself
@@ -22,7 +23,7 @@ function CharCreate( ply )
 	mdlPanel = vgui.Create( "DModelPanel", backgroundPanel )
 	mdlPanel:SetSize( 550, 550 )
 	mdlPanel:SetPos( -135, -105 )
-	mdlPanel:SetModel( table.ToString(rpc.animation.models.male[1]) )
+	mdlPanel:SetModel( rpc.animation.models.male[1]) )
 	mdlPanel:SetAnimSpeed( 0.0 )
 	mdlPanel:SetAnimated( false )
 	mdlPanel:SetAmbientLight( Color( 50, 50, 50 ) )
