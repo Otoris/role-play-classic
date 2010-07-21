@@ -17,7 +17,7 @@ include( 'sv_database.lua' )
    Desc: Called immediately after starting the gamemode 
 ---------------------------------------------------------*/
 function GM:Initialize( )
-	for k, v in pairs(mdlList) do
+	for k, v in pairs(rpc.animation.models) do
 		util.PrecacheModel(v)
 	end
 end
