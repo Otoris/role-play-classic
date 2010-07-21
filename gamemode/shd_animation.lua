@@ -554,4 +554,4 @@ rpc.animation.AddMaleHumanModel("models/humans/group03m/male_06.mdl");
 rpc.animation.AddMaleHumanModel("models/humans/group03m/male_07.mdl");
 rpc.animation.AddMaleHumanModel("models/humans/group03m/male_08.mdl");
 rpc.animation.AddMaleHumanModel("models/humans/group03m/male_09.mdl");
-PrintTable( rpc.animation.models == maleHuman )
+PrintTable( rpc.animation.models.male )
