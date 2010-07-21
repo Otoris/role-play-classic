@@ -5,6 +5,7 @@ AddCSLuaFile( 'shared.lua' )
 AddCSLuaFile( 'shd_player.lua' )
 AddCSLuaFile( 'shd_chat.lua' )
 AddCSLuaFile( 'shd_config.lua' )
+AddCSLuaFile( 'shd_animation.lua' )
 
 include( 'shared.lua' )
 include( 'sv_chat.lua' )
