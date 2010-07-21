@@ -9,6 +9,7 @@ StartingHP = 100 --Default: 100
 rpc = {}
 rpc.animation = {}
 rpc.animation.models = {} --List of models for model select. Note: Valve NPC animations suck to bind to player animations, therefore I chose to use player animations,,,
+mdlList = {}
 
 mdlList[1] = "models/player/group01/male_08.mdl"
 mdlList[2] = "models/player/group01/male_09.mdl"
