@@ -135,7 +135,7 @@ function LoadProfile( ply )
 	ply:SetNWString( "FirstName", ply.firstname )
 	ply:SetNWString( "SurName", ply.surname )
 	ply:SetNWString( "Currency", ply.currency )
-	ply:ConCommand( "ChangeModel ".. ply.model )
+	ply:ConCommand( "ChangePLModel ".. ply.model )
 	ply:Spawn()
 	
 	if DeveloperMode then

@@ -70,14 +70,14 @@ function GM:ShowTeam( ply )
 
 end
 
-function ChangeModel( ply, cmd, args )
+function ChangePLModel( ply, cmd, args )
 
 	if args[1] then
 		ply:SetModel( args[1] )
 	end
 
 end
-concommand.Add( "ChangeModel", ChangeModel )
+concommand.Add( "ChangePLModel", ChangePLModel )
 
 
 
