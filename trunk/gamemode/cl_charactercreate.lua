@@ -23,7 +23,7 @@ function CharCreate( ply )
 	mdlPanel = vgui.Create( "DModelPanel", backgroundPanel )
 	mdlPanel:SetSize( 550, 550 )
 	mdlPanel:SetPos( -135, -105 )
-	mdlPanel:SetModel( rpc.animation.models.male[1] )
+	mdlPanel:SetModel( mdlList[1] )
 	mdlPanel:SetAnimSpeed( 0.0 )
 	mdlPanel:SetAnimated( false )
 	mdlPanel:SetAmbientLight( Color( 50, 50, 50 ) )
@@ -49,10 +49,10 @@ function CharCreate( ply )
 		i = i - 1
 
 		if( i == 0 ) then
-			i = #rpc.animation.models.male
+			i = #mdlList
 		end
 		
-		mdlPanel:SetModel(rpc.animation.models.male[i])
+		mdlPanel:SetModel(mdlList[i])
 		
 	end
 	LastMdl:SetPos( 20, 460 )
@@ -63,11 +63,11 @@ function CharCreate( ply )
 		
 		i = i + 1
 
-		if(i > #rpc.animation.models.male) then
+		if(i > #mdlList) then
 			i = 1
 		end
 		
-		mdlPanel:SetModel(rpc.animation.models.male[i])
+		mdlPanel:SetModel(mdlList[i])
 		
 	end
 	NextMdl:SetPos( 220, 460 )
@@ -108,7 +108,7 @@ function CharCreate( ply )
 	apply:SetPos( 5, 140 )
 	apply:SetText( "Finish and Create" )
 	apply.DoClick = function()
-		LocalPlayer().finalmodel = rpc.animation.models.male[i]
+		LocalPlayer().finalmodel = mdlList[i]
 		LocalPlayer().finalfirstname = firstname:GetValue()
 		LocalPlayer().finalsurname = surname:GetValue()
 		if string.len( LocalPlayer().finalfirstname ) > 16 then
