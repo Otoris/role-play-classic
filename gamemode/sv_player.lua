@@ -34,6 +34,15 @@ function meta:PlayerSetModel( model )
 
 end
 
+function meta:LoadLock( ply, arg )
+	if arg == 1 then
+		ply:Lock()
+	else
+		ply:UnLock()
+	end
+end
+concommand.Add( "loadlock", LoadLock )
+
 function meta:GiveCurrency( amount )
 	local camount = meta:GetNWString( "Currency" )
 	local famount = tonumber(camount) + tonumber(amount)
